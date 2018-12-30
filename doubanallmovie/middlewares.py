@@ -10,9 +10,15 @@ import requests as req
 from requests.exceptions import ConnectionError
 import logging
 import random
-class RadomUserAgent(object):
+
+
+class RandomUserAgent(object):
+    '''
+        a random user agent class
+        to generate random user agent
+    '''
     logger = logging.getLogger(__name__)
-    random_ualist=[
+    random_ualist = [
         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
         "Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6",
@@ -32,23 +38,33 @@ class RadomUserAgent(object):
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
         "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
     ]
+
     def get_random_Agent(self):
         return random.choice(self.random_ualist)
+
     def process_request(self, request, spider):
         self.logger.debug("use random user-agent,")
         request.headers['User-Agent'] = self.get_random_Agent()
-    #'scrapy crawl somespider -s JOBDIR=crawls/somespider-1'
+    # 'scrapy crawl somespider -s JOBDIR=crawls/somespider-1'
+
+
 class DoubanDownloaderMiddleware(object):
-    logger=logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
+    '''
+        this function is a middleware of the proxy pool
+        and it is easy to change api from other proxy pool
+    '''
+
     def get_proxy(self):
         try:
-            resp=req.get('http://127.0.0.1:5010/get/')
-            return 'http://'+resp.text
+            resp = req.get('http://127.0.0.1:5010/get/')
+            return 'http://' + resp.text
         except ConnectionError:
             self.logger.debug("use proxy faild")
             raise ConnectionError
+
     def process_request(self, request, spider):
-        proxy=self.get_proxy()
-        self.logger.debug("use proxy "+str(proxy))
+        proxy = self.get_proxy()
+        self.logger.debug("use proxy " + str(proxy))
         request.meta['proxy'] = proxy
         return None

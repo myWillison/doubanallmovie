@@ -47,6 +47,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Referer': 'https://movie.douban.com/',
     'Host': 'movie.douban.com',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36',
+    'Cookie':'__yadk_uid=q4E9fEOZxeIqqqNp5CbR6wlj1eOLZ8i8; ll="118295"; bid=8c1x2gUeAWg; _vwo_uuid_v2=D408E86B80FF97F3EB80BEA544703E694|df2c31e4f140ab11f65ef45ed02ed26e; gr_user_id=183a09ad-2131-472a-972d-0fbbf917845b; _ga=GA1.2.738094072.1534322196; __utmv=30149280.4874; viewed="26838150_1230154_1257113_25910544"; __utma=30149280.738094072.1534322196.1542116582.1542370031.32; __utmc=30149280; __utmz=30149280.1542370031.32.14.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmt=1; __utmb=30149280.1.10.1542370031; ap_v=0,6.0; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1542370033%2C%22https%3A%2F%2Fwww.douban.com%2F%22%5D; _pk_ses.100001.4cf6=*; __utma=223695111.251246016.1534238193.1536111112.1542370033.29; __utmb=223695111.0.10.1542370033; __utmc=223695111; __utmz=223695111.1542370033.29.20.utmcsr=douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/; ps=y; dbcl2="48746302:3+yAHCiKacA"; ck=wM9r; push_noty_num=0; push_doumail_num=0; _pk_id.100001.4cf6=9a2a17a00778cbb1.1534238193.35.1542370583.1537521595.',
 }
 
 # Enable or disable spider middlewares
@@ -58,7 +59,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    #'doubanallmovie.middlewares.RadomUserAgent':542,
+    #'doubanallmovie.middlewares.RandomUserAgent':542,
     #'doubanallmovie.middlewares.DoubanDownloaderMiddleware': 543,
 }
 

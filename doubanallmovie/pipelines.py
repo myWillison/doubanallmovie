@@ -5,12 +5,19 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
-from doubanallmovie.items import movieItem,commentItem
-#判断类型
+from doubanallmovie.items import movieItem, commentItem
+
+
+# 判断类型
 class MongoPipeline(object):
+    '''
+        this is a class to store the data into the mongodb
+    '''
+
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
+
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
@@ -28,9 +35,10 @@ class MongoPipeline(object):
     def process_item(self, item, spider):
         if isinstance(item, movieItem):
             self.db[item.get('title')].insert(dict(item))
-        if isinstance(item,commentItem):
+        if isinstance(item, commentItem):
             self.db[item.get('movie_name')].insert(dict(item))
         return item
+
 
 class DoubanallmoviePipeline(object):
     def process_item(self, item, spider):
